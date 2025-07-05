@@ -1,0 +1,21 @@
+# Ignore node_modules for both frontend and backend
+car-management-system/node_modules/
+frontend/node_modules/
+
+# Ignore build outputs (optional)
+car-management-system/dist/
+frontend/dist/
+car-management-system/build/
+frontend/build/
+
+# Ignore environment files
+car-management-system/.env
+frontend/.env
+
+# Ignore log files
+*.log
+npm-debug.log*
+
+# Ignore system/OS-specific files
+.DS_Store
+Thumbs.db
