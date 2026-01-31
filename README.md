@@ -155,10 +155,4 @@ cms/
 - **Admin**: Can manage inventory, approve bookings, manage locations
 - **Manager**: Can view reports and manage bookings
 
-## License
 
-MIT
-
-## Contributors
-
-- Your Name
