@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS spare_parts;
 DROP TABLE IF EXISTS locations;
 DROP TABLE IF EXISTS reservations;
 DROP TABLE IF EXISTS cars;
-
+DROP TABLE IF EXISTS test_drives;
 
 -- Users Table (Unified for Customers & Employees)
 CREATE TABLE users (
@@ -43,7 +43,7 @@ CREATE TABLE reservations (
     start_date DATE NOT NULL , -- No dynamic date in CHECK
     end_date DATE NOT NULL ,
     total_price DECIMAL(10,2) NOT NULL ,
-    status ENUM('pending', 'approved', 'canceled') DEFAULT 'pending',
+    status ENUM('pending', 'confirmed', 'completed', 'canceled') DEFAULT 'pending',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (car_id) REFERENCES cars(id) ON DELETE CASCADE
@@ -127,4 +127,21 @@ CREATE TABLE approve_bookings (
 
   FOREIGN KEY (user_id) REFERENCES users(id),
   FOREIGN KEY (car_id) REFERENCES cars(id)
+);
+
+-- Test Drive Bookings Table
+CREATE TABLE test_drives (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    car_id INT NOT NULL,
+    test_drive_date DATE NOT NULL,
+    test_drive_time TIME NOT NULL,
+    location_id INT NOT NULL,
+    status ENUM('pending', 'confirmed', 'completed', 'canceled') DEFAULT 'pending',
+    notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (car_id) REFERENCES cars(id) ON DELETE CASCADE,
+    FOREIGN KEY (location_id) REFERENCES locations(id) ON DELETE RESTRICT
 );

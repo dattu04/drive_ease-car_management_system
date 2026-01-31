@@ -3,7 +3,5 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  server: {
-    historyApiFallback: true, // Ensures React Router works properly
-  },
+  base: '/ drive_ease-car_management_system/',   // 👈 repo name
 })

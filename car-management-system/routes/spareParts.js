@@ -6,11 +6,11 @@ const authMiddleware = require("../middleware/authMiddleware");
 // Add a new spare part (Only Employees)
 router.post("/", authMiddleware.verifyToken, authMiddleware.checkEmployee, sparePartsController.addSparePart);
 
-// Get all spare parts (Only Employees)
-router.get("/", authMiddleware.verifyToken, authMiddleware.checkEmployee, sparePartsController.getSpareParts);
+// Get all spare parts (Public access for customers to view)
+router.get("/", authMiddleware.verifyToken, sparePartsController.getSpareParts);
 
-// Get a spare part by ID (Only Employees)
-router.get("/:id", authMiddleware.verifyToken, authMiddleware.checkEmployee, sparePartsController.getSparePartById);
+// Get a spare part by ID (Public access for customers to view)
+router.get("/:id", authMiddleware.verifyToken, sparePartsController.getSparePartById);
 
 // Update spare part stock quantity (Only Employees)
 router.put("/:id", authMiddleware.verifyToken, authMiddleware.checkEmployee, sparePartsController.updateSparePartStock);

@@ -2,13 +2,11 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import AuthService from '../services/AuthService';
 import '../styles/auth.css';
-import logo from '../assets/drivee.jpg';
 
-function Login() {
+function Login({ onLoginSuccess }) {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -20,7 +18,6 @@ function Login() {
     e.preventDefault();
     setError('');
     setLoading(true);
-
     try {
       const { email, password } = formData;
       if (!email || !password) {
@@ -28,9 +25,13 @@ function Login() {
         setLoading(false);
         return;
       }
-
       const response = await AuthService.login(email, password);
       console.log('Login successful:', response);
+
+      if (onLoginSuccess) {
+        onLoginSuccess(response);
+      }
+
       setTimeout(() => {
         navigate('/dashboard', { replace: true });
       }, 100);
@@ -42,87 +43,50 @@ function Login() {
     }
   };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
   return (
-    <div className="driveease-login-container">
-      <div className="driveease-login-card">
-        <div className="driveease-logo">
-        <img src={logo} alt="DriveEase Logo" class="driveease-logo" />
-
+    <div className="auth-container">
+      <div className="auth-card">
+        <div className="auth-header">
+          <h1>Welcome to DriveEase</h1>
+          <p>Your journey begins with a simple login</p>
         </div>
 
-        <h1>Welcome to DriveEase</h1>
-        <p className="driveease-subtitle">
-          Your journey begins with a simple login
-        </p>
+        {error && <div className="error-message">{error}</div>}
 
-        {error && <div className="driveease-error-message">{error}</div>}
-        
-        <form onSubmit={handleSubmit} className="driveease-form">
-          <div className="driveease-input-group">
+        <form onSubmit={handleSubmit} className="auth-form">
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
             <input
               type="email"
               id="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="Email"
-              className="driveease-input"
+              placeholder="Enter your email"
               required
             />
           </div>
 
-          <div className="driveease-input-group">
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
             <input
-              type={showPassword ? "text" : "password"}
+              type="password"
               id="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
-              placeholder="Password"
-              className="driveease-input"
+              placeholder="Enter your password"
               required
             />
-            <button 
-              type="button" 
-              className="driveease-toggle-password"
-              onClick={togglePasswordVisibility}
-              aria-label={showPassword ? "Hide password" : "Show password"}
-            >
-              {showPassword ? "Hide" : "Show"}
-            </button>
           </div>
 
-          <div className="driveease-forgot-password">
-            <Link to="/forgot-password" className="driveease-link">Forgot Password?</Link>
-          </div>
-
-          <button type="submit" className="driveease-button" disabled={loading}>
+          <button type="submit" className="submit-btn" disabled={loading}>
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
 
-        <div className="driveease-separator">
-          <span>or continue with</span>
-        </div>
-
-        <div className="driveease-social-buttons">
-          <button className="driveease-social-button google">
-            <span className="driveease-social-icon">G</span>
-          </button>
-          <button className="driveease-social-button apple">
-            <span className="driveease-social-icon">apple</span>
-          </button>
-          <button className="driveease-social-button facebook">
-            <span className="driveease-social-icon">f</span>
-          </button>
-        </div>
-
-        <div className="driveease-signup">
-          <p>Don't have an account? <Link to="/register" className="driveease-link">Register now</Link></p>
+        <div className="auth-footer">
+          <p>Don't have an account? <Link to="/register">Sign up</Link></p>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/drivee.jpg';
+import '../styles/Sidebar.css';
 
 const Sidebar = ({
   activeSection,
@@ -18,7 +19,7 @@ const Sidebar = ({
 
     const customerItems = [
       { id: 'featured', label: 'Featured Vehicles', icon: '🚗' },
-      { id: 'testdrive', label: 'Schedule Test Drive', icon: '🔑' },
+      { id: 'TestDriveBookings', label: 'Schedule Test Drive', icon: '🔑' },
       { id: 'bookings', label: 'My Bookings', icon: '📅' },
       { id: 'services', label: 'Book a Service', icon: '🔧' }
     ];
@@ -95,10 +96,10 @@ const Sidebar = ({
                   {user.role === 'customer'
                     ? 'Customer'
                     : user.role === 'employee'
-                    ? 'Employee'
-                    : user.role === 'supervisor'
-                    ? 'Supervisor'
-                    : 'User'}
+                      ? 'Employee'
+                      : user.role === 'supervisor'
+                        ? 'Supervisor'
+                        : 'User'}
                 </span>
               </div>
             )}

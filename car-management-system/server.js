@@ -33,7 +33,7 @@ const reservationRoutes = require("./routes/reservations");
 const serviceRoutes = require("./routes/service");
 const sparePartsRoutes = require("./routes/spareParts");
 const sparePartBookingRoutes = require("./routes/sparePartBooking");
-
+const testdriveRoutes = require("./routes/testdrive");
 // Use routes
 app.use("/api/auth", authRoutes);
 app.use("/api/cars", carRoutes);
@@ -42,6 +42,7 @@ app.use("/api/reservations", reservationRoutes);
 app.use("/api/services", serviceRoutes);
 app.use("/api/spare-parts", sparePartsRoutes);
 app.use("/api/spare-bookings", sparePartBookingRoutes);
+app.use("/api/testdrives", testdriveRoutes);
 
 // Welcome route
 app.get("/", (req, res) => {

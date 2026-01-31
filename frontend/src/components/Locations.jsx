@@ -58,7 +58,7 @@ const Locations = ({ setActiveSection, setTestDriveForm, testDriveForm }) => {
                   className="test-drive-btn"
                   onClick={() => {
                     // Switch to test drive booking and pre-select this location
-                    setActiveSection('testdrive');
+                    setActiveSection('TestDriveBookings');
                     setTestDriveForm(prev => ({
                       ...prev,
                       location: location.id.toString()

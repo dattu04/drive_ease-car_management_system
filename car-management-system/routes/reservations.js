@@ -4,16 +4,16 @@ const reservationController = require("../controllers/reservationController");
 const authMiddleware = require("../middleware/authMiddleware");
 
 // Add a new reservation (Only Employees)
-router.post("/",authMiddleware.verifyToken, reservationController.addReservation);
+router.post("/", authMiddleware.verifyToken, reservationController.addReservation);
 
 // Get all reservations (Public Access)
-router.get("/",authMiddleware.verifyToken, reservationController.getReservations);
+router.get("/", authMiddleware.verifyToken, reservationController.getReservations);
 
 // Get a reservation by ID (Public Access)
-router.get("/:id",authMiddleware.verifyToken, reservationController.getReservationById);
+router.get("/:id", authMiddleware.verifyToken, reservationController.getReservationById);
 
-// Update a reservation status (Only Supervisor)
-router.put("/:id", authMiddleware.verifyToken, authMiddleware.checkSupervisor, reservationController.updateReservation);
+// Update a reservation status (Employees and Supervisors)
+router.put("/:id", authMiddleware.verifyToken, authMiddleware.checkEmployee, reservationController.updateReservation);
 
 // Delete a reservation (Only Supervisor)
 router.delete("/:id", authMiddleware.verifyToken, authMiddleware.checkSupervisor, reservationController.deleteReservation);

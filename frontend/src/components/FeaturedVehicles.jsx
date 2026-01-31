@@ -158,7 +158,7 @@ const FeaturedVehicles = ({ setActiveSection, user, setSelectedCar, isManageMode
                 </div>
                 <div className="car-actions">
                   {user?.role === 'customer' && car.availability && (
-                    <button className="test-drive-btn" onClick={() => handleSelectCar(car, 'testdrive')}>
+                    <button className="test-drive-btn" onClick={() => handleSelectCar(car, 'TestDriveBookings')}>
                       Book Test Drive
                     </button>
                   )}
