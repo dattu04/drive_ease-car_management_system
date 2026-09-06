@@ -44,9 +44,7 @@
 
     "mysql2": "^3.13.0",
 
-    "prompt-sync": "^4.2.0",
-
-    "react-scripts": "^5.0.1"
+    "prompt-sync": "^4.2.0"
 
   }
 
